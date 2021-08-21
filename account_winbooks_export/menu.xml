@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            icon="STOCK_EXECUTE"
+            name="Winbooks Export"
+            action="action_account_winbooks_export"
+            id="menu_account_winbooks_export"
+            parent="account.menu_finance_reports"
+            sequence="110"
+            />
+    </data>
+</odoo>
