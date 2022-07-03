@@ -1,0 +1,12 @@
+<odoo>
+    <template id="hide_add_to_cart" inherit_id="website_sale.product_quantity">
+        <xpath expr="//div[hasclass('css_quantity')]" position="replace" />
+        <xpath expr="//a[@id='add_to_cart']" position="replace" />
+    </template>
+
+    <template id="hide_my_cart" inherit_id="website_sale.header">
+        <xpath expr="//li[@id='my_cart']" position="replace" />
+    </template>
+</odoo>
+
+
