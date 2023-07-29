@@ -97,6 +97,8 @@ Contributors
 
   * Alexey Pelykh <alexey.pelykh@corphub.eu>
 
+* Thibault Francois <francois.th@gmail.com>
+
 Maintainers
 ~~~~~~~~~~~
 

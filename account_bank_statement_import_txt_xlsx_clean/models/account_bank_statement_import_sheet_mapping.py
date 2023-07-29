@@ -147,6 +147,11 @@ class AccountBankStatementImportSheetMapping(models.Model):
         string='Bank Account column',
         help='Partner\'s bank account',
     )
+    no_header = fields.Boolean(
+        string="No header",
+        help="If there is no header column should be directly index starting from 0"
+    )
+
 
     @api.onchange('float_thousands_sep')
     def onchange_thousands_separator(self):

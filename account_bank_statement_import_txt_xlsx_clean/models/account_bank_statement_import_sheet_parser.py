@@ -114,10 +114,14 @@ class AccountBankStatementImportSheetParser(models.TransientModel):
                 **csv_options
             )
 
-        if isinstance(csv_or_xlsx, tuple):
-            header = [str(value) for value in csv_or_xlsx[1].row_values(0)]
+        if mapping.no_header:
+            header = self._get_header(mapping)
         else:
-            header = [value.strip() for value in next(csv_or_xlsx)]
+            if isinstance(csv_or_xlsx, tuple):
+                header = [str(value) for value in csv_or_xlsx[1].row_values(0)]
+            else:
+                header = [value.strip() for value in next(csv_or_xlsx)]
+
         timestamp_column = header.index(mapping.timestamp_column)
         currency_column = header.index(mapping.currency_column) \
             if mapping.currency_column else None
@@ -255,6 +259,26 @@ class AccountBankStatementImportSheetParser(models.TransientModel):
                 line['bank_account'] = bank_account
             lines.append(line)
         return lines
+
+    def _get_header(self, mapping):
+        column_list = [
+            'timestamp_column',
+            'currency_column',
+            'amount_column',
+            'balance_column',
+            'original_currency_column',
+            'original_amount_column',
+            'debit_credit_column',
+            'transaction_id_column',
+            'description_column',
+            'notes_column',
+            'reference_column',
+            'partner_name_column',
+            'bank_name_column',
+            'bank_account_column',
+        ]
+        header = [int(mapping[column]) if mapping[column] else -1 for column in column_list]
+        return [str(i) for i in range(max(header) + 1)]
 
     @api.model
     def _convert_line_to_transactions(self, line):
